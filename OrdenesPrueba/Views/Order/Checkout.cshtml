@@ -1,0 +1,21 @@
+﻿@model OrdenesPrueba.Data.DTO.Order.OrderDTO
+<h1>Checkout</h1>
+
+<h4>Order : @Model.OrderNumber</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label"> amount to be paid </label>
+            <input class="form-control" value="@Model.TotalAmount" />
+        </div>
+        <div class="form-group">
+            <input type="Button" value="Checkout" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,287 @@
+﻿@model OrdenesPrueba.Data.DTO.Order.OrderDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="padding-bottom: 0;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 style="color:#9b9b9b;">Create Order: @Model.OrderNumber </h5>
+                    </div>
+                    <div class="col-md-4 align-right text-right" style="">
+                        <a asp-action="Index" class="btn btn-secondary btn-rounded" style="background:#002879;"> Back to List</a>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-action="Create">
+                            @if (Model.Process)
+                            {
+                            <div class=" @(Model.Success ? "alert alert-success" : "alert alert-danger") ">
+                                <div class="row">
+                                    @Model.Mesage
+                                </div>
+                            </div>
+                            }
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label asp-for="CustomerId" class="control-label font-weight-bold"></label>
+                                    <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                                </div>
+
+                                <div class="col-md-8  align-items-center">
+                                    <input type="button" value="+ Add Item" id="selectProduct" class="btn btn-primary" />
+                                    <input type="button" value="- Clean All" id="cleanAll" class="btn btn-danger" />
+                                    <label class="control-label font-weight-bold" style="width: 51%;float: right;"> Order Items </label>
+                                    <table class="table" id="tableOrder">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none"></th>
+                                                <th>
+                                                    Product
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.ItemOrderItemDto[0].UnitPrice)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.ItemOrderItemDto[0].Quantity)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.ItemOrderItemDto[0].Total)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tBodyOrder">
+                                            @foreach (var item in Model.ItemOrderItemDto)
+                                            {
+                                                <tr id="order-@item.Posicion">
+                                                    <td style="display:none">
+                                                        <input type="hidden" name="ItemOrderItemDto[@item.Posicion].ProductId" value="@item.ProductId" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="ItemOrderItemDto[@item.Posicion].Product" value="@item.Product" />
+                                                        @item.Product
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="ItemOrderItemDto[@item.Posicion].Quantity" value="@item.Quantity" />
+                                                        @item.Quantity
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="ItemOrderItemDto[@item.Posicion].UnitPrice" value="@item.UnitPrice" />
+                                                        @item.UnitPrice
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="ItemOrderItemDto[@item.Posicion].Total" value="@item.Total" />
+                                                        @item.Total
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <label id="TotalAmount" class="control-label font-weight-bold" style="float: right;">Total Amount: 0 </label>
+                                    @Html.ValidationMessageFor(model => model.ItemOrderItemDto, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center"><input type="submit" value="Create Order" class="btn btn-success" /></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalSelectProduct" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="ProductModal">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 8px 15px 8px">
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="glyphicon glyphicon-list-alt"></i> ADD PRODUCT TO ORDER
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="ProductDiv">
+                    <div class="form-group">
+                        <label asp-for="ProductId" class="control-label"></label>
+                        <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label  class="control-label">Quantity</label>
+                        <input type="number" id="Quantity" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label  class="control-label">UnitPrice</label>
+                        <input disabled id="UnitPrice" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Total</label>
+                        <input disabled id="total" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-right">
+                <button type="button" id="SaveProduct" class="btn btn-primary" >Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(document).ready(function () {
+            //open modal
+            $("#selectProduct").click(function () {
+                $('#ModalSelectProduct').modal('show');
+            });
+
+            //Clean All Table
+            $("#cleanAll").click(function () {
+                let bodyOrderUpdate = $("");
+                $('#tBodyOrder').html(bodyOrderUpdate);
+                $('#TotalAmount').text("Total Amount: 0");
+            });
+
+            //event click to save product
+        $("#SaveProduct").click(function () {
+                let productId = $('#ProductId').val();
+                let productText = $("#ProductId option:selected").text();
+
+                if (!findProductExist(2,productText) ) {
+                    let quantity = $('#Quantity').val();
+                    let unitPrice = $('#UnitPrice').val();
+                    let total = $('#total').val();
+
+                    if (productId && productText && quantity && unitPrice && total) {
+                        getDetailProduct(productId);
+                        let nrows = getRowTable();
+                        let bodyOrderUpdate = $(returnBodyOrder(nrows, productId, productText, quantity, unitPrice, total));
+                        $('#tBodyOrder').append(bodyOrderUpdate);
+                        //if all ok ,close modal
+                        $("#ModalSelectProduct").modal('hide');
+                        $('#TotalAmount').text("Total Amount: " + countTotals(5));
+                        cleanModal();
+                    } else {
+                        alert("fill in all the fields");
+                    }
+                } else {
+                    alert("This element repeated in the order");
+                }
+            });
+
+            //change select Product
+            $("#ProductId").change(function () {
+                let productId = $('#ProductId').val();
+                getDetailProduct(productId);
+            });
+
+            // event to quantity
+            $('#Quantity').on('input', function () {
+                var Quantity = $(this);
+                let productId = $('#ProductId').val();
+                if (productId) {
+                    getDetailProduct(productId);
+                }
+            });
+
+            // input solo permite decimales
+            $('#UnitPrice').on('input', function () {
+                this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
+            });
+
+            // input solo permite decimales
+            $('#total').on('input', function () {
+                this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
+            });
+
+        
+    });
+
+    function cleanModal() {
+       $('#Quantity').val("");
+       $('#UnitPrice').val("");
+       $('#total').val("");
+    }
+
+    function countTotals(columna) {
+        let cantidad = 0;
+        $('#tableOrder').find('td:nth-child(' + columna + ')').each(function () {
+            cantidad += +($(this).text());
+        });
+        return cantidad;
+    }
+
+    function findProductExist(columna,Product) {
+        let findElement = false;
+        $('#tableOrder').find('td:nth-child(' + columna + ')').each(function () {
+            let ProductTable = $(this).text();
+            if (ProductTable === Product) {
+                findElement = true;
+            }
+        });
+        return findElement;
+    }
+   
+    function getRowTable() {
+        var rowCount = $("#tableOrder tr").length - 1;
+        return rowCount;
+    }
+
+    //incorporation of dynamic elements through of the use of Javascript(JQuery).
+    function returnBodyOrder(nrows, productId, productText, quantity, unitPrice, total) {
+        let bodyOrderUpdate =
+            '<tr id="order-' + nrows + '">' +
+                '<td style="display:none">' +
+                    '<input type="hidden" name="ItemOrderItemDto[' + nrows + '].ProductId" value="' + productId + '"/>' +
+                '</td>' +
+                '<td>' +
+                    '<input type="hidden" name="ItemOrderItemDto[' + nrows + '].Product" value="' + productText + '"/>' + productText +
+                '</td>' +
+                '<td>' +
+                    '<input type="hidden" name="ItemOrderItemDto[' + nrows + '].Quantity" value="' + quantity + '"/>'+ quantity +
+                '</td>' +
+                '<td>' +
+                    '<input type="hidden" name="ItemOrderItemDto[' + nrows + '].UnitPrice" value="' + unitPrice + '"/>'+ unitPrice +
+                '</td>' +
+                '<td>' +
+                    '<input type="hidden" name="ItemOrderItemDto[' + nrows + '].Total" value="' + total + '"/>' + total +
+                '</td>' +
+            '</tr>';
+        return bodyOrderUpdate;
+    }
+
+    function getDetailProduct(IdProduct) {
+        var ajaxOptions = {
+            url: '@Url.Action("GetDetailProduct")?IdProduct=' + IdProduct,
+           method: 'GET'
+        };
+        $.ajax(ajaxOptions)
+        .done(function (response) {
+            getTotalValue(response);
+            return response;
+        })
+        .fail(function () {
+            alert('Error');
+        })
+        .always();
+    }
+
+    function getTotalValue(response) {
+        let productId = $('#ProductId').val();
+        let quantity = $('#Quantity').val();
+        if (quantity) {
+            $('#UnitPrice').val(response.productDetail.unitPrice);
+            let totalVal = parseFloat(quantity) * parseFloat(response.productDetail.unitPrice);
+            $("#total").val(totalVal);
+        }
+    }
+
+</script>
+}
+
