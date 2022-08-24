@@ -1,0 +1,72 @@
+ CREATE TABLE Customer(
+    CustomerId int IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+    CustomerName  nvarchar(40) not NULL,
+	Phone nvarchar(20) NULL,
+    Statu bit not null,
+    DateCreate datetime not null,
+    LastModificated  datetime   null,
+    DateDelete  datetime   null,
+	UNIQUE(CustomerName)
+);
+
+   CREATE TABLE Orders(
+    OrderId int IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+	CustomerId int NOT NULL,
+    OrderNumber  nvarchar(10) NULL,
+	Serie int not null,
+	OrderDate datetime,
+	TotalAmount decimal(12,2) not null,
+    Statu bit not null,
+    DateCreate datetime not null,
+    LastModificated  datetime   null,
+    DateDelete  datetime   null,
+	FOREIGN KEY (CustomerId)
+	REFERENCES Customer (CustomerId),
+	UNIQUE(OrderNumber)
+);
+
+ CREATE TABLE Supplier(
+    SupplierId int IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+	CopanyName nvarchar(40) NOT NULL,
+    Phone nvarchar(20) NULL,
+	Statu bit not null,
+    DateCreate datetime not null,
+    LastModificated  datetime   null,
+    DateDelete  datetime   null,
+	UNIQUE(CopanyName)
+);
+
+ CREATE TABLE Product(
+    ProductId int IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+	ProductName nvarchar(50) NOT NULL,
+    SupplierId int NULL,
+	UnitPrice decimal (12,2) null,
+	IsDiscontinued bit not null,
+	Statu bit not null,
+    DateCreate datetime not null,
+    LastModificated  datetime   null,
+    DateDelete  datetime   null,
+	FOREIGN KEY (SupplierId)
+	REFERENCES Supplier (SupplierId),
+	UNIQUE(SupplierId)
+);
+
+
+ CREATE TABLE OrderItem(
+    OrderId int NOT NULL, 
+	ProductId int NOT NULL ,
+    UnitPrice decimal (12,2) null,
+	Quantity int NULL,
+    Statu bit not null,
+    DateCreate datetime not null,
+    LastModificated  datetime   null,
+    DateDelete  datetime   null,
+	PRIMARY KEY (OrderId,ProductId),
+	FOREIGN KEY (OrderId)
+	REFERENCES Orders (OrderId),
+	FOREIGN KEY (ProductId)
+	REFERENCES Product (ProductId)
+);
+
+
+
