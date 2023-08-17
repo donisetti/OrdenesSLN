@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace OrdenesPrueba.Data.Models
+namespace PedidosPOC.Data.Models
 {
     public partial class Product
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrdenesPrueba.Data.DTO.Order
+namespace PedidosPOC.Data.DTO.Order
 {
    public class OrderDTO
     {

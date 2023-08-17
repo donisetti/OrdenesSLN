@@ -1,0 +1,5 @@
+C:\Lab\Modals\Pedidos\OrdenesPrueba.Data\obj\Debug\net5.0\PedidosPOC.Data.csproj.AssemblyReference.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba.Data\obj\Debug\net5.0\PedidosPOC.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Lab\Modals\Pedidos\OrdenesPrueba.Data\obj\Debug\net5.0\PedidosPOC.Data.AssemblyInfoInputs.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba.Data\obj\Debug\net5.0\PedidosPOC.Data.AssemblyInfo.cs
+C:\Lab\Modals\Pedidos\OrdenesPrueba.Data\obj\Debug\net5.0\PedidosPOC.Data.csproj.CoreCompileInputs.cache

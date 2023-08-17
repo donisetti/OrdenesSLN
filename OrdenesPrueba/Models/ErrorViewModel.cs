@@ -1,6 +1,6 @@
 using System;
 
-namespace OrdenesPrueba.Models
+namespace PedidosPOC.Models
 {
     public class ErrorViewModel
     {

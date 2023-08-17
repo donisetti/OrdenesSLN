@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrdenesPrueba.Data.DTO.Order;
-using OrdenesPrueba.Data.Repository.Interfaces;
+using PedidosPOC.Data.DTO.Order;
+using PedidosPOC.Data.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace OrdenesPrueba.Controllers
+namespace PedidosPOC.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IOrderRepository orderRepository;
-        public OrderController(IOrderRepository orderRepository)
+        private readonly IPedidoRepositorio orderRepository;
+        public OrderController(IPedidoRepositorio orderRepository)
         {
             this.orderRepository = orderRepository;
         }

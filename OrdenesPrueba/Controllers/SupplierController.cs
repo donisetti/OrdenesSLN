@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using OrdenesPrueba.Data;
-using OrdenesPrueba.Data.Models;
+using PedidosPOC.Data;
+using PedidosPOC.Data.Models;
 
-namespace OrdenesPrueba.Controllers
+namespace PedidosPOC.Controllers
 {
     public class SupplierController : Controller
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using OrdenesPrueba.Data.Models;
+using PedidosPOC.Data.Models;
 
 #nullable disable
 
-namespace OrdenesPrueba.Data
+namespace PedidosPOC.Data
 {
     public partial class OrderCustomerBDContext : DbContext
     {

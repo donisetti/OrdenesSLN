@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OrdenesPrueba.Data;
-using OrdenesPrueba.Data.Repository.Implemetation;
-using OrdenesPrueba.Data.Repository.Interfaces;
+using PedidosPOC.Data;
+using PedidosPOC.Data.Repository.Implemetation;
+using PedidosPOC.Data.Repository.Interfaces;
 
-namespace OrdenesPrueba
+namespace PedidosPOC
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace OrdenesPrueba
               opciones.UseSqlServer(Configuration.GetConnectionString("EntityConnection"))
             );
 
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

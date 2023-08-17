@@ -1,0 +1,8 @@
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.csproj.AssemblyReference.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.AssemblyInfoInputs.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.AssemblyInfo.cs
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.csproj.CoreCompileInputs.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.MvcApplicationPartsAssemblyInfo.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.RazorAssemblyInfo.cache
+C:\Lab\Modals\Pedidos\OrdenesPrueba\obj\Debug\net5.0\PedidosPOC.RazorAssemblyInfo.cs

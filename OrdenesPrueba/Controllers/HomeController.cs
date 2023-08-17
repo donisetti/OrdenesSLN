@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OrdenesPrueba.Models;
+using PedidosPOC.Models;
 
-namespace OrdenesPrueba.Controllers
+namespace PedidosPOC.Controllers
 {
     public class HomeController : Controller
     {

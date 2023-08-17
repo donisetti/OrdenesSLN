@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrdenesPrueba.Data
+namespace PedidosPOC.Data
 {
     class Program
     {
